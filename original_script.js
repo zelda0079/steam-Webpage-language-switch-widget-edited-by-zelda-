@@ -10,10 +10,10 @@
 // @description:ja    このスクリプトは、（ユーザーの言語設定を変更せずに）WebページのUI言語のみを変更するスイッチをページに追加。そして、すべてのリンクが指定した言語に移動するようにする。
 // @author            Jasaj
 // ==/UserScript==
- 
+
 /* jshint esversion: 6 */
- 
-({
+
+{
 	const add_lang_change_btn = (l_txt, l_URL, l_iso) => {
 		let theURL = new URL(window.location);
 		theURL.searchParams.set("l", l_URL);
@@ -34,7 +34,7 @@
 		}
 		document.getElementById("cart_status_data").append(ele);
 	};
- 
+
 	const change_all_url_lang = (l_URL) => {
 		let nodes = document.querySelectorAll('a[href]');
 		for (let node of nodes) {
@@ -46,7 +46,7 @@
 			}
 		}
 	};
- 
+
 	const change_all_url_lang_to_current_page_lang = () => {
 		steam_lang_btn_map.forEach(v => {
 			if (document.documentElement.lang == v[2]) {
@@ -54,26 +54,25 @@
 			}
 		});
 	};
- 
+
 	const hide_es_language_warning = () => {
 		let es_language_warning_s = document.getElementsByClassName("es_language_warning");
 		if (es_language_warning_s.length > 0) { es_language_warning_s[0].style.display = "none"; }
 	};
- 
+
 	// label displayed on button, language tag for URL parameter, iso style language tag for <html lang="xxx">
 	let steam_lang_btn_map = [["中", "schinese", "zh-cn"], ["日", "japanese", "ja"], ["英", "english", "en"]];
- 
+
 	steam_lang_btn_map.forEach(v => { add_lang_change_btn(v[0], v[1], v[2]); });
- 
- 
- 
+
+
+
 	change_all_url_lang_to_current_page_lang();
 	hide_es_language_warning();
- 
+
 	const observer = new MutationObserver(() => { change_all_url_lang_to_current_page_lang(); hide_es_language_warning(); });
 	observer.observe(document.body, {
 		childList: true,
 		subtree: true
 	});
-})();
- 
+}
