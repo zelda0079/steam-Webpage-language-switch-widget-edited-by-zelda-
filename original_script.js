@@ -13,7 +13,7 @@
  
 /* jshint esversion: 6 */
  
-{
+({
 	const add_lang_change_btn = (l_txt, l_URL, l_iso) => {
 		let theURL = new URL(window.location);
 		theURL.searchParams.set("l", l_URL);
@@ -75,5 +75,5 @@
 		childList: true,
 		subtree: true
 	});
-}
+})();
  
