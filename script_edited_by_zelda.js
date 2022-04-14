@@ -33,7 +33,7 @@
 			ele.style.cursor = "pointer";
 			elle.onclick = () => { window.location = theURL.href; };
 		}
-		document.getElementById("global_action_menu").append(ele);
+		document.getElementById("global_actions").append(ele);
 	};
 
 	const change_all_url_lang = (l_URL) => {
