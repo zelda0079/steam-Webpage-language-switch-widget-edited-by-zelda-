@@ -40,7 +40,7 @@
 		let nodes = document.querySelectorAll('a[href]');
 		for (let node of nodes) {
 			let theURL = new URL(node.href);
-			let hostmap = ["steamcommunity.com", "store.steampowered.com"];
+			let hostmap = [ "store.steampowered.com"];
 			if (hostmap.includes(theURL.host)) {
 				theURL.searchParams.set("l", l_URL);
 				node.href = theURL.href;
