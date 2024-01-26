@@ -11,7 +11,7 @@ https://i.imgur.com/XMmwCbKm.jpg
 https://i.imgur.com/PMMgZKtm.jpg
 
 想用原版參考
-script_edited_by_zelda.js
+script_edited_by_zelda1.js
 
 =================================================================
 
