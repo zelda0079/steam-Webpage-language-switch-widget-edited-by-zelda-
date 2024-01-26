@@ -10,6 +10,9 @@ https://i.imgur.com/XMmwCbKm.jpg
 商店
 https://i.imgur.com/PMMgZKtm.jpg
 
+想用原版參考
+script_edited_by_zelda.js
+
 =================================================================
 
 這個是用來切換STEAM網頁語言用的腳本
