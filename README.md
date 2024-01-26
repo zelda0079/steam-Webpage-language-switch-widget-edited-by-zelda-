@@ -1,16 +1,23 @@
 # steam-Webpage-language-switch-widget-edited-by-zelda-
 
 2024年1月26日更新
+
 script_edited_by_zelda2.js
+
 這個版本STEAM商店和社區比較統一顯示
+
 但是比商店版醜，比社區版好看
+
 截圖:
+
 社群
 https://i.imgur.com/XMmwCbKm.jpg
+
 商店
 https://i.imgur.com/PMMgZKtm.jpg
 
 想用原版參考
+
 script_edited_by_zelda1.js
 
 =================================================================
