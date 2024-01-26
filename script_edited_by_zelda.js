@@ -5,7 +5,7 @@
 // @namespace         jasaj.me (edited by zelda)
 // @match             https://store.steampowered.com/*
 // @match             https://steamcommunity.com/*
-// @version           0.1.6
+// @version           2
 // @updateURL         https://raw.githubusercontent.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda-/main/script_edited_by_zelda.js
 // @description       这个脚本用于添加一个小按钮来 只更改网页前端语言设置，不更改用户的语言设置。并且使所有的链接指向指定的语言。
 // @description:en    This script is used to add a small button to change only the front-end language setting of the web page, not the language set by the user. and make all links point to the specified language.
@@ -13,14 +13,14 @@
 // @author            Jasaj
 // ==/UserScript==
 
-/* jshint esversion: 6 */
+
 
 {
 	const add_lang_change_btn = (l_txt, l_URL, l_iso) => {
 		let theURL = new URL(window.location);
 		theURL.searchParams.set("l", l_URL);
 		let ele = document.createElement('div');
-		ele.classList.add('store_header_btn');
+		ele.classList.add('menuitem');
 		let elle = ele.appendChild(document.createElement('a'));
 		elle.style.padding = "0 5px";
 		elle.classList.add('store_header_btn_content');
@@ -32,6 +32,7 @@
 		} else {
 			ele.classList.add('store_header_btn_gray');
 			ele.style.cursor = "pointer";
+            ele.style.padding="0px 5px";
 			elle.onclick = () => { window.location = theURL.href; };
 		}
 		document.getElementById("global_actions").append(ele);
