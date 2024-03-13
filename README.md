@@ -1,5 +1,21 @@
 # steam-Webpage-language-switch-widget-edited-by-zelda-
 
+2024年3月13日更新 V3版
+
+刪去把所有頁面都換掉語言的功能
+
+因為當初就是只用來看公告
+
+不需要長時間轉換語言
+
+反而現在自帶?l=language(繁體是tchinese)會讓STEAM網頁有些問題
+
+想用原版本可以去old_version複製貼上
+
+script_edited_by_zelda1.js或是script_edited_by_zelda2.js
+
+=================================================================
+
 2024年1月26日更新
 
 script_edited_by_zelda2.js
