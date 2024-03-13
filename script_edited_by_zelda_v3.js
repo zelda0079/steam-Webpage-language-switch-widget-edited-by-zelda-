@@ -60,7 +60,7 @@
 	// label displayed on button, language tag for URL parameter, iso style language tag for <html lang="xxx">
 	let steam_lang_btn_map = [["繁", "tchinese", "zh-tw"],["簡", "schinese", "zh-cn"], ["日", "japanese", "ja"], ["英", "english", "en"]];
 
-	steam_lang_btn_map.forEach(v => { add_lang_change_btn(v[0], v[1], v[2], v[3]); });
+	steam_lang_btn_map.forEach(v => { add_lang_change_btn(v[0], v[1], v[2]); });
 
 
 
