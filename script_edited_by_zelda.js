@@ -5,7 +5,7 @@
 // @namespace         jasaj.me (edited by zelda)
 // @match             https://store.steampowered.com/*
 // @match             https://steamcommunity.com/*
-// @version           2
+// @version           3
 // @updateURL         https://raw.githubusercontent.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda-/main/script_edited_by_zelda.js
 // @description       这个脚本用于添加一个小按钮来 只更改网页前端语言设置，不更改用户的语言设置。并且使所有的链接指向指定的语言。
 // @description:en    This script is used to add a small button to change only the front-end language setting of the web page, not the language set by the user. and make all links point to the specified language.
@@ -50,13 +50,7 @@
 		}
 	};
 
-	const change_all_url_lang_to_current_page_lang = () => {
-		steam_lang_btn_map.forEach(v => {
-			if (document.documentElement.lang == v[2]) {
-				change_all_url_lang(v[1]);
-			}
-		});
-	};
+
 
 	const hide_es_language_warning = () => {
 		let es_language_warning_s = document.getElementsByClassName("es_language_warning");
@@ -66,17 +60,10 @@
 	// label displayed on button, language tag for URL parameter, iso style language tag for <html lang="xxx">
 	let steam_lang_btn_map = [["繁", "tchinese", "zh-tw"],["簡", "schinese", "zh-cn"], ["日", "japanese", "ja"], ["英", "english", "en"]];
 
-	steam_lang_btn_map.forEach(v => { add_lang_change_btn(v[0], v[1], v[2]); });
+	steam_lang_btn_map.forEach(v => { add_lang_change_btn(v[0], v[1], v[2], v[3]); });
 
 
 
-	change_all_url_lang_to_current_page_lang();
-	hide_es_language_warning();
 
-	const observer = new MutationObserver(() => { change_all_url_lang_to_current_page_lang(); hide_es_language_warning(); });
-	observer.observe(document.body, {
-		childList: true,
-		subtree: true
-	});
 }
 
