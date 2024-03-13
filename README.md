@@ -14,6 +14,12 @@
 
 script_edited_by_zelda1.js或是script_edited_by_zelda2.js
 
+已知的V2版問題:
+
+商店頁面閱讀評論時，評論太長會顯示繼續閱讀，按下去不行，它的網址是https://store.steampowered.com/app/APPID/GAME_NAME/#，如果再有?=tchinese會出問題
+
+V3版的缺點就是如果你要看一大堆公告是按進去看的情況，那就不方便，不按進去的話還好
+
 =================================================================
 
 2024年1月26日更新
