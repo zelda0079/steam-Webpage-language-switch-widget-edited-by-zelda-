@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name              steam 网页语言切换小工具 (edited by zelda)
-// @name:en           steam Webpage language switch widget (edited by zelda)
-// @name:ja           steam ウェブ言語スイッチ (edited by zelda)
+// @name              steam 网页语言切换小工具 (V3 edited by zelda)
+// @name:en           steam Webpage language switch widget (V3 edited by zelda)
+// @name:ja           steam ウェブ言語スイッチ (V3 edited by zelda)
 // @namespace         jasaj.me (edited by zelda)
 // @match             https://store.steampowered.com/*
 // @match             https://steamcommunity.com/*
 // @version           3
-// @updateURL         https://raw.githubusercontent.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda-/main/script_edited_by_zelda.js
+// @updateURL         https://raw.githubusercontent.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda-/main/script_edited_by_zelda_v3.user.js
 // @description       这个脚本用于添加一个小按钮来 只更改网页前端语言设置，不更改用户的语言设置。并且使所有的链接指向指定的语言。
 // @description:en    This script is used to add a small button to change only the front-end language setting of the web page, not the language set by the user. and make all links point to the specified language.
 // @description:ja    このスクリプトは、（ユーザーの言語設定を変更せずに）WebページのUI言語のみを変更するスイッチをページに追加。そして、すべてのリンクが指定した言語に移動するようにする。
