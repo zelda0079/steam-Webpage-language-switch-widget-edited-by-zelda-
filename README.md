@@ -1,5 +1,15 @@
-# steam-Webpage-language-switch-widget-edited-by-zelda-
+# steam-Webpage-language-switch-widget-edited-by-zelda-  
 
+
+~~~~~~~~~~~~~~~~~~~
+2025年11月21日更新 V4版 (BETA) 更新  
+畢竟現在是AI時代了，我用AI把按鈕變好看  
+還有steamcommunity.com後面網址?l=language也支持了，不用每次要看都按一次那麼87  
+還有V2片的問題早已消失（好像是），因此這V4版是兼容V2和V3的優點  
+應該是最好，但未測試，我暫時在做白老鼠，一段時間沒問題就正式了  
+
+~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 2024年3月13日更新 V3版
 
 刪去把所有頁面都換掉語言的功能
@@ -20,8 +30,8 @@ script_edited_by_zelda1.js或是script_edited_by_zelda2.js
 
 V3版的缺點就是如果你要看一大堆公告是按進去看的情況，那就不方便，不按進去的話還好
 
-=================================================================
-
+~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 2024年1月26日更新
 
 script_edited_by_zelda2.js
@@ -29,7 +39,7 @@ script_edited_by_zelda2.js
 這個版本STEAM商店和社區比較統一顯示
 
 但是比商店版醜，比社區版好看
-
+~~~~~~~~~~~~~~~~~~~
 截圖:
 
 社群
@@ -38,11 +48,10 @@ https://i.imgur.com/XMmwCbKm.jpg
 商店
 https://i.imgur.com/PMMgZKtm.jpg
 
-想用原版參考
+想用原版參考old version裡的  
 
 script_edited_by_zelda1.js
 
-=================================================================
 
 這個是用來切換STEAM網頁語言用的腳本
 
