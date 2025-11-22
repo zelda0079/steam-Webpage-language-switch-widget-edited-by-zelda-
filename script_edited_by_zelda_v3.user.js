@@ -5,7 +5,7 @@
 // @namespace         jasaj.me (edited by zelda)
 // @match             https://store.steampowered.com/*
 // @match             https://steamcommunity.com/*
-// @version           3
+// @version           3.1
 // @updateURL         https://raw.githubusercontent.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda-/main/script_edited_by_zelda_v3.user.js
 // @description       这个脚本用于添加一个小按钮来 只更改网页前端语言设置，不更改用户的语言设置。并且使所有的链接指向指定的语言。
 // @description:en    This script is used to add a small button to change only the front-end language setting of the web page, not the language set by the user. and make all links point to the specified language.
@@ -16,53 +16,73 @@
 
 
 {
-	const add_lang_change_btn = (l_txt, l_URL, l_iso) => {
-		let theURL = new URL(window.location);
-		theURL.searchParams.set("l", l_URL);
-		let ele = document.createElement('div');
-		ele.classList.add('menuitem');
-		let elle = ele.appendChild(document.createElement('a'));
-		elle.style.padding = "0 5px";
-		elle.classList.add('store_header_btn_content');
-		elle.appendChild(document.createTextNode(l_txt));
-		if (((new URL(window.location)).searchParams.get("l") == l_URL) || (document.documentElement.lang == l_iso)) {
-			ele.style["background-color"] = "rgb(255 255 255 / 10%)";
-			ele.style.cursor = "not-allowed";
-			elle.style.color = "rgb(255 255 255 / 50%)";
-		} else {
-			ele.classList.add('store_header_btn_gray');
-			ele.style.cursor = "pointer";
-            ele.style.padding="0px 5px";
-			elle.onclick = () => { window.location = theURL.href; };
-		}
-		document.getElementById("global_actions").append(ele);
-	};
+    // 加入自訂 CSS
+    const style = document.createElement("style");
+    style.textContent = `
+        .zelda-lang-btn {
+            padding: 4px 10px !important;
+            margin-left: 6px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.8) !important;
+            transition: all 0.18s ease;
+            cursor: pointer;
+            user-select: none;
+        }
 
-	const change_all_url_lang = (l_URL) => {
-		let nodes = document.querySelectorAll('a[href]');
-		for (let node of nodes) {
-			let theURL = new URL(node.href);
-			let hostmap = [ "store.steampowered.com"];
-			if (hostmap.includes(theURL.host)) {
-				theURL.searchParams.set("l", l_URL);
-				node.href = theURL.href;
-			}
-		}
-	};
+        .zelda-lang-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-1px);
+        }
+
+        .zelda-lang-btn.disabled {
+            background: rgba(255,255,255,0.20) !important;
+            color: rgba(255,255,255,0.45) !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+        }
+    `;
+    document.head.appendChild(style);
 
 
+    const add_lang_change_btn = (l_txt, l_URL, l_iso) => {
+        let theURL = new URL(window.location);
+        theURL.searchParams.set("l", l_URL);
 
-	const hide_es_language_warning = () => {
-		let es_language_warning_s = document.getElementsByClassName("es_language_warning");
-		if (es_language_warning_s.length > 0) { es_language_warning_s[0].style.display = "none"; }
-	};
+        // 外層
+        let div = document.createElement("div");
+        div.classList.add("menuitem");
 
-	// label displayed on button, language tag for URL parameter, iso style language tag for <html lang="xxx">
-	let steam_lang_btn_map = [["繁", "tchinese", "zh-tw"],["簡", "schinese", "zh-cn"], ["日", "japanese", "ja"], ["英", "english", "en"]];
+        // 按鈕本體
+        let btn = document.createElement("a");
+        btn.classList.add("zelda-lang-btn");
+        btn.textContent = l_txt;
 
-	steam_lang_btn_map.forEach(v => { add_lang_change_btn(v[0], v[1], v[2]); });
+        const active = ((new URL(window.location)).searchParams.get("l") == l_URL)
+                     || (document.documentElement.lang == l_iso);
 
+        if (active) {
+            btn.classList.add("disabled");
+        } else {
+            btn.onclick = () => { window.location = theURL.href; };
+        }
 
+        div.appendChild(btn);
+        document.getElementById("global_actions").append(div);
+    };
 
+    // 語言按鈕清單
+    let steam_lang_btn_map = [
+        ["繁", "tchinese", "zh-tw"],
+        ["簡", "schinese", "zh-cn"],
+        ["日", "japanese", "ja"],
+        ["英", "english", "en"]
+    ];
 
+    steam_lang_btn_map.forEach(v => add_lang_change_btn(v[0], v[1], v[2]));
 }
+
