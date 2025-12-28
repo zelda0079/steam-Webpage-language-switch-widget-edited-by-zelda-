@@ -1,59 +1,40 @@
 // ==UserScript==
-// @name              steam 网页语言切换小工具 (zelda improved version)
-// @namespace         jasaj.me (edited by zelda)
+// @name              steam 網頁語言切換小工具 (zelda improved version) 
+// @namespace         jasaj.me (edited by zelda & CHATGPT & GEMINI)
 // @match             https://store.steampowered.com/*
 // @match             https://steamcommunity.com/*
-// @exclude     *store.steampowered.com/widget/*
-// @version           4 (beta)
-// @updateURL         https://raw.githubusercontent.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda-/main/script_beta.user.js
+// @exclude           *store.steampowered.com/widget/*
+// @version           4.1 (beta)
+// @updateURL         https://raw.githubusercontent.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda/main/script_beta.user.js
 // @description       添加語言切換按鈕，只更改前端語言。同時讓 store + community 所有連結自動帶上 ?l=語言。
+// @grant             none
+// @run-at            document-start
 // ==/UserScript==
 
 (function () {
+    'use strict';
 
-    /* === 美化選單用 CSS === */
-    const style = document.createElement("style");
-    style.textContent = `
-        #zelda-lang-box {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-            padding: 4px 8px;
-            background: rgba(0,0,0,0.35);
-            border-radius: 6px;
-            margin-left: 10px;
-        }
-        .zelda-lang-btn {
-            padding: 3px 7px;
-            border-radius: 6px;
-            color: #fff;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.15s;
-            user-select: none;
-        }
-        .zelda-lang-btn:hover {
-            background: rgba(255,255,255,0.25);
-        }
-        .zelda-lang-btn.active {
-            background: rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.6);
-            cursor: default;
-        }
-    `;
-    document.head.appendChild(style);
+    let currentLangParam = null;
 
-
-    /* === 語言選單放置位置 === */
-    const headerTarget =
-        document.querySelector("#global_actions") ||
-        document.querySelector(".user_avatar")?.parentNode ||
-        document.body;
-
-    const langBox = document.createElement("div");
-    langBox.id = "zelda-lang-box";
-    headerTarget.appendChild(langBox);
-
+    /* === 美化選單用 CSS (只在需要時注入) === */
+    function injectStyles() {
+        if (document.getElementById('zelda-lang-styles')) return;
+        const style = document.createElement("style");
+        style.id = 'zelda-lang-styles';
+        style.textContent = `
+            .zelda-lang-btn {
+                padding: 4px 10px !important; margin-left: 6px; border-radius: 6px; font-size: 13px; font-weight: 600;
+                display: inline-flex; align-items: center; background: rgba(255,255,255,0.06);
+                color: rgba(255,255,255,0.8) !important; transition: all 0.18s ease; cursor: pointer; user-select: none;
+            }
+            .zelda-lang-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+            .zelda-lang-btn.disabled {
+                background: rgba(255,255,255,0.20) !important; color: rgba(255,255,255,0.45) !important;
+                cursor: not-allowed !important; transform: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
 
     const LANG_MAP = [
         ["繁", "tchinese", "zh-tw"],
@@ -62,77 +43,91 @@
         ["英", "english", "en"]
     ];
 
-
-    function addLangButton(label, langParam, iso) {
-        const btn = document.createElement("div");
-        btn.className = "zelda-lang-btn";
-        btn.textContent = label;
-
+    /* === 決定當前應該使用的語言參數 === */
+    function determineCurrentLang() {
         const currentURL = new URL(location.href);
+        const langParamFromURL = currentURL.searchParams.get("l");
 
-        const isActive =
-            currentURL.searchParams.get("l") === langParam ||
-            document.documentElement.lang === iso;
-
-        if (isActive) btn.classList.add("active");
-        else {
-            btn.onclick = () => {
-                currentURL.searchParams.set("l", langParam);
-                location.href = currentURL.href;
-            };
+        if (langParamFromURL) {
+            const langConfig = LANG_MAP.find(v => v[1] === langParamFromURL);
+            if (langConfig) return langConfig[1];
         }
 
-        langBox.appendChild(btn);
-    }
-
-
-    LANG_MAP.forEach(v => addLangButton(v[0], v[1], v[2]));
-
-
-    /* === 將所有Steam連結補上 ?l=語言（含 store + community）=== */
-    function applyLangToAllLinks(langParam) {
-        document.querySelectorAll("a[href]").forEach(a => {
-            try {
-                const url = new URL(a.href);
-
-                // 限制為 steam store or community 域名
-                if (
-                    url.host === "store.steampowered.com" ||
-                    url.host === "steamcommunity.com"
-                ) {
-                    url.searchParams.set("l", langParam);
-                    a.href = url.toString();
-                }
-            } catch (_) {}
-        });
-    }
-
-    function updateLinksByCurrentPage() {
         const htmlLang = document.documentElement.lang;
+        if (htmlLang) {
+            const langConfig = LANG_MAP.find(v => v[2].toLowerCase() === htmlLang.toLowerCase());
+            if (langConfig) return langConfig[1];
+        }
 
-        for (const v of LANG_MAP) {
-            if (v[2] === htmlLang) {
-                applyLangToAllLinks(v[1]);
+        // 預設語言
+        return "tchinese";
+    }
+
+    /* === 核心修正：在滑鼠點擊時攔截並修改連結 === */
+    document.addEventListener('mousedown', function(event) {
+        // 如果 currentLangParam 還沒確定，就先確定一次
+        if (!currentLangParam) {
+            currentLangParam = determineCurrentLang();
+        }
+
+        // 找到被點擊的元素或其父層中的 <a> 標籤
+        const link = event.target.closest('a');
+
+        if (link && link.href) {
+            try {
+                const url = new URL(link.href);
+                if (url.host === "store.steampowered.com" || url.host === "steamcommunity.com") {
+                    if (url.searchParams.get('l') !== currentLangParam) {
+                        url.searchParams.set('l', currentLangParam);
+                        link.href = url.toString();
+                    }
+                }
+            } catch (e) {
+                // 忽略無效的 href
             }
         }
+    }, true); // 使用捕獲階段(true)，確保我們的事件監聽比頁面上的其他點擊事件更早執行
+
+    /* === 創建語言切換按鈕 (延遲到 DOM 載入後) === */
+    function setupUI() {
+        injectStyles();
+        currentLangParam = determineCurrentLang(); // 再次確定當前語言
+
+        const headerTarget = document.querySelector("#global_actions") || document.querySelector(".user_avatar")?.parentNode;
+        if (!headerTarget || document.getElementById('zelda-lang-box')) return;
+
+        const langBox = document.createElement("div");
+        langBox.id = "zelda-lang-box";
+
+        LANG_MAP.forEach(([label, langParam, iso]) => {
+            const btn = document.createElement("div");
+            btn.className = "zelda-lang-btn";
+            btn.textContent = label;
+
+            if (currentLangParam === langParam) {
+                btn.classList.add("disabled");
+            } else {
+                btn.onclick = (e) => {
+                    e.preventDefault(); // 防止觸發 mousedown 事件
+                    e.stopPropagation();
+                    const currentURL = new URL(location.href);
+                    currentURL.searchParams.set("l", langParam);
+                    location.href = currentURL.href;
+                };
+            }
+            langBox.appendChild(btn);
+        });
+        headerTarget.appendChild(langBox);
+
+        // 隱藏 Steam store 的語言提示框
+        const warningBox = document.querySelector(".es_language_warning");
+        if (warningBox) warningBox.style.display = "none";
     }
 
-    updateLinksByCurrentPage();
-
-
-    /* === 隱藏 Steam store 的語言提示框 === */
-    function hideLanguageWarning() {
-        const w = document.querySelector(".es_language_warning");
-        if (w) w.style.display = "none";
+    // 當 DOM 結構準備好時，才開始建立 UI
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupUI);
+    } else {
+        setupUI();
     }
-    hideLanguageWarning();
-
-
-    /* === 監聽 DOM 變化，自動重新調整連結語言 === */
-    const observer = new MutationObserver(() => {
-        updateLinksByCurrentPage();
-        hideLanguageWarning();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
 })();
