@@ -72,7 +72,7 @@
         }
 
         div.appendChild(btn);
-        document.getElementById("global_actions").append(div);
+        document.getElementById("global_action_menu").append(div);
     };
 
     // 語言按鈕清單
