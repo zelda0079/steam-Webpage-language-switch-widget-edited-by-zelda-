@@ -1,4 +1,15 @@
 # steam-Webpage-language-switch-widget-edited-by-zelda-  
+BETA 4版  
+<img src=https://i.vgy.me/8JzruS.png >  
+V3版  
+<img src=https://i.vgy.me/bWwWgf.png >  
+之後應該會轉為BETA 4版的樣式，因為比較好看  
+
+安裝方法:
+V3版  
+https://github.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda-/raw/refs/heads/main/script_edited_by_zelda_v3.user.js  
+BETA 4 版  
+https://github.com/zelda0079/steam-Webpage-language-switch-widget-edited-by-zelda-/raw/refs/heads/main/script_beta.user.js  
 ~~~~~~~~~~~~~~~~~~~
 2025年12月28日更新 V3.2版 更新  
 V3.2 是修正按鈕位置
@@ -44,7 +55,7 @@ script_edited_by_zelda1.js或是script_edited_by_zelda2.js
 V3版的缺點就是如果你要看一大堆公告是按進去看的情況，那就不方便，不按進去的話還好
 
 ~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~  
 2024年1月26日更新
 
 script_edited_by_zelda2.js
@@ -52,55 +63,30 @@ script_edited_by_zelda2.js
 這個版本STEAM商店和社區比較統一顯示
 
 但是比商店版醜，比社區版好看
-~~~~~~~~~~~~~~~~~~~
-截圖:
+~~~~~~~~~~~~~~~~~~~  
+截圖:  
 
-社群
-https://i.imgur.com/XMmwCbKm.jpg
-
-商店
-https://i.imgur.com/PMMgZKtm.jpg
+社群 <img src=https://i.imgur.com/XMmwCbKm.jpg >  
+商店 <img src=https://i.imgur.com/PMMgZKtm.jpg >  
 
 想用原版參考old version裡的  
+script_edited_by_zelda1.js  
 
-script_edited_by_zelda1.js
+這個是用來切換STEAM網頁語言用的腳本  
+你必須要有Tampermonkey  
+作者的原腳本  
+https://greasyfork.org/zh-TW/scripts/425175-steam-%E7%BD%91%E9%A1%B5%E8%AF%AD%E8%A8%80%E5%88%87%E6%8D%A2%E5%B0%8F%E5%B7%A5%E5%85%B7  
+原本效果在商店遊戲頁面才能用  
+<img src=https://i.imgur.com/w73KExH.png >  
 
+我修改後加了繁體和改變位置  
+同時能在商店和社群使用  
+<img src=https://i.imgur.com/hA8sL4t.png >  
+<img src=https://i.imgur.com/ttnsjPd.png >  
 
-這個是用來切換STEAM網頁語言用的腳本
-
-你必須要有Tampermonkey
-
-作者的原腳本
-
-https://greasyfork.org/zh-TW/scripts/425175-steam-%E7%BD%91%E9%A1%B5%E8%AF%AD%E8%A8%80%E5%88%87%E6%8D%A2%E5%B0%8F%E5%B7%A5%E5%85%B7
-
-原本效果在商店遊戲頁面才能用
-
-https://i.imgur.com/w73KExH.png
-
-我修改後加了繁體和改變位置
-
-同時能在商店和社群使用
-
-https://i.imgur.com/hA8sL4t.png
-
-https://i.imgur.com/ttnsjPd.png
-
-這樣在看遊戲新聞/更新公告時就相當方便切換語言了
-
-可以看到只寫簡體中文公告的
-
-而不用看英文公告
-
-安裝方法:
-
-按script_edited_by_zelda.js
-
-複製內容
-
-到Tampermonkey新增，再貼上，儲存
-
+這樣在看遊戲新聞/更新公告時就相當方便切換語言了  
+可以看到只寫簡體中文公告的  
+而不用看英文公告  
 =================================================================
-2022/4/16更新
-
+2022/4/16更新  
 發現了有個問題, 就是STEAM社區按下連結, 有些連結後面如果有?l=tchinese, 連結就會無效, 修正此問題, 請重新複製腳本一次
